@@ -3,7 +3,6 @@ import os
 import sys
 import csv
 from typing import List, Dict
-from datetime import datetime
 from PersonClasses.BasePerson import BasePerson
 from PersonClasses.Employee import Employee
 from PersonClasses.Student import Student
