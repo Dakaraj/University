@@ -1,11 +1,11 @@
-from typing import Any, Dict
+from typing import Dict
 
 
 class BasePerson:
     """
     Base class for any person
     """
-    def __init__(self, **kwargs: Dict[str, str]) -> None:
+    def __init__(self, **kwargs: str) -> None:
         self._person_data: Dict[str, str] = {
             'name': kwargs['name'],
             'last_name': kwargs['last_name'],
@@ -16,7 +16,10 @@ class BasePerson:
             'phone_number': kwargs['phone_number']
         }
 
-    def search_person(self, input_data: str) -> Any:
+    def __str__(self):
+        return self.__repr__()
+
+    def search_person(self, input_data: str) -> 'BasePerson':
         for value in self._person_data.values():
             print(value)
             if isinstance(value, str):

@@ -1,3 +1,5 @@
 name,last_name,middle_name,date_of_birth,faculty,address,phone_number,room,position,course,qualification
-Anton,Kramarev,Vladimirovich,13-10-1986,Engineering,"Lisovii avenue 22",380663458549,303,Professor,,
-Yaroslava,Mukha,Vitalievna,22-10-1987,Citology,"Mishugy 1/4",380508032107,,,5,Bachelor
+Anton,Kramarev,Vladimirovich,13-10-1986,Engineering,Lisovii avenue 22,+380663458549,303,Professor,,
+Yaroslava,Mukha,Vitalievna,22-10-1987,Citology,Mishugy 1/4,+380508032107,,,V,Bachelor
+Hren,Gory,S,10-12-1986,Shit loading,26 Shit street,+380558796978,105,Dean,,
+New,Student,Shitty,14-12-1988,Hat wearing,22 Red Hat avenue,+380992581344,,,VI,bachelor
