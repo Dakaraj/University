@@ -87,7 +87,7 @@ def get_pattern_input(class_type: str, variable: str, pattern: str, pattern_repr
 
 
 def select_qualification() -> str:
-    matcher = {'1': 'student', '2': 'bachelor', '3': 'specialist', '4': 'master', '5': 'postgraduate'}
+    matcher = {'1': 'Student', '2': 'Bachelor', '3': 'Specialist', '4': 'Master', '5': 'Postgraduate'}
 
     while True:
         clear()
@@ -145,7 +145,7 @@ def gather_general_inputs(class_type: str) -> Tuple[str, str, str, str, str, str
     faculty = get_user_input(class_type, 'faculty', 2, 50)
     address = get_user_input(class_type, 'address', 10, 50)
     phone_pattern = r'\+?(\d{1,3})[-\s]?\(?(\d\d)\)?[-\s]?(\d\d\d)[-\s]?(\d\d)[-\s]?(\d\d)'
-    phone_number = get_pattern_input(class_type, 'phone number', phone_pattern, '+380994596578 / 380 (66) 257-12-31')
+    phone_number = get_pattern_input(class_type, 'phone number', phone_pattern, '+380994596578 / 7 (33) 257-12-31')
     parts_list = re.findall(phone_pattern, phone_number)[0]
     phone_number = '+' + ''.join(parts_list)
 
@@ -174,3 +174,54 @@ def add_new_student() -> Optional[Student]:
                           phone_number=phone_number, qualification=qualification, course=course)
 
     return new_student
+
+
+def search_results_manager(search_results: List[BasePerson], all_persons_list: List[BasePerson]) -> None:
+    index = 0
+    while search_results:
+        clear()
+        print('############ SEARCH RESULTS ############\n\n'
+              f'{len(search_results)} items found\n'
+              f'Item {index + 1}/{len(search_results)}:\n')
+        print(search_results[index])
+        print('\nActions:')
+        print('1. Previous item\n' if index != 0 else '', end='')
+        print('2. Next item\n' if index != len(search_results) - 1 else '', end='')
+        print('3. Edit item\n'
+              '4. Delete item\n'
+              '0. Cancel\n')
+        results_input = input('>')
+
+        if results_input == '0':
+            break
+
+        elif results_input == '1' and index != 0:
+            index -= 1
+            continue
+
+        elif results_input == '2' and index != len(search_results) - 1:
+            index += 1
+            continue
+
+        elif results_input == '3':
+            item_to_edit = search_results[index]
+            while True:
+                print('############ EDIT ITEM ############\n\n')
+                print(item_to_edit)
+                print('\nField to edit:\n'
+                      '1. Name\n'
+                      '2. Last name\n'
+                      '3. Middle name\n'
+                      '4. Date of birth\n'
+                      '5. Faculty\n'
+                      '6. Address\n'
+                      '7. Phone number')
+                if isinstance(item_to_edit, Employee):
+                    print('8. Room\n9. Position')
+                elif isinstance(item_to_edit, Student):
+                    pass
+
+        elif results_input == '4':
+            current_object = search_results[index]
+            del search_results[index]
+            all_persons_list.remove(current_object)

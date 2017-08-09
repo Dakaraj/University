@@ -21,7 +21,6 @@ class BasePerson:
 
     def search_person(self, input_data: str) -> 'BasePerson':
         for value in self._person_data.values():
-            print(value)
             if isinstance(value, str):
                 if input_data.lower() in value.lower():
                     return self

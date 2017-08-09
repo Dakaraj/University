@@ -71,4 +71,39 @@ class App:
                         continue
 
             elif user_input == '2':
+
+                while True:
+                    clear()
+                    print('############ SEARCH ALL ENTRIES ############\n\n'
+                          'Input a search query (min 3 symbols):\n')
+                    search_all_query = input('>')
+                    if len(search_all_query) < 3:
+                        continue
+
+                    list_of_finds = []
+                    for person in self.persons_list:
+                        result = person.search_person(search_all_query)
+                        if result:
+                            list_of_finds.append(result)
+
+                    if not list_of_finds:
+                        clear()
+                        print('############ SEARCH ALL ENTRIES ############\n\n'
+                              'No results found')
+                        sleep(3)
+                        break
+
+                    search_results_manager(list_of_finds, self.persons_list)
+                    break
+
+            elif user_input == '3':
                 pass
+
+            elif user_input == '4':
+                pass
+
+            elif user_input == '5':
+                pass
+
+            else:
+                continue
