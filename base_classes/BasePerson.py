@@ -19,15 +19,19 @@ class BasePerson:
     def __str__(self):
         return self.__repr__()
 
-    def search_person(self, input_data: str) -> 'BasePerson':
+    def search_person(self, input_data: str) -> bool:
         for value in self._person_data.values():
             if isinstance(value, str):
                 if input_data.lower() in value.lower():
-                    return self
+                    return True
+
+        return False
 
     def update_person_data(self, key: str, value: str) -> None:
         self._person_data[key] = value
 
     def get_as_dict(self) -> Dict[str, str]:
-
         return self._person_data
+
+    def get_specific_value(self, key: str) -> str:
+        return self._person_data[key]

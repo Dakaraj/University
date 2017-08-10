@@ -1,5 +1,8 @@
 /.mypy_cache/
 /.idea/
+/dist/
+/build/
+*.spec
 *.pyc
 sh.exe*
 test.py

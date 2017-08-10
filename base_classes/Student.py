@@ -1,21 +1,21 @@
-from PersonClasses.BasePerson import BasePerson
+from base_classes.BasePerson import BasePerson
 
 
-class Employee(BasePerson):
+class Student(BasePerson):
     """
-    Employee class. Extends BasePerson
+    Student class. Extends BasePerson
     """
     def __init__(self, **kwargs: str) -> None:
         super().__init__(**kwargs)
-        self._person_data['room'] = kwargs['room']
-        self._person_data['position'] = kwargs['position']
+        self._person_data['course'] = kwargs['course']
+        self._person_data['qualification'] = kwargs['qualification']
 
     def __repr__(self) -> str:
         return f'''Name: {self._person_data['name']} {self._person_data['middle_name']} {self._person_data['last_name']}:
 
 Faculty: {self._person_data['faculty']}
-Position: {self._person_data['position']}
-Room: {self._person_data['room']}
+Qualification: {self._person_data['qualification']}
+Course: {self._person_data['course']}
 
 Phone number: {self._person_data['phone_number']}
 Address: {self._person_data['address']}
