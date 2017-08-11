@@ -37,7 +37,7 @@ def load_from_csv() -> List[BasePerson]:
 
     with open(DATA_PATH + os.sep + FILE_NAME, newline='') as csv_file:
         reader: DictReader = DictReader(csv_file, fieldnames=FIELD_NAMES)
-        next(reader)
+        next(reader)  # type: ignore
 
         persons_list: List[BasePerson] = []
         for row in reader:
@@ -116,9 +116,12 @@ def select_qualification() -> str:
 
 def select_course(qualification: str) -> str:
     courses: str = QUALIFICATIONS[qualification]
+    matcher: Dict[str, Dict[str, str]] = {
+        'I - IV': {'1': 'I', '2': 'II', '3': 'III', '4': 'IV'},
+        'V - VI': {'1': 'V', '2': 'VI'}
+    }
 
     if courses == 'I - IV':
-        matcher: Dict[str, str] = {'1': 'I', '2': 'II', '3': 'III', '4': 'IV'}
         while True:
             clear()
             print('############ STUDENT\'S COURSE ############\n\n'
@@ -127,23 +130,22 @@ def select_course(qualification: str) -> str:
                   '2. II\n'
                   '3. III\n'
                   '4. IV\n')
-            course_input: str = input('>')
+            course_1_4_input: str = input('>')
 
-            if course_input in matcher:
-                return matcher[course_input]
+            if course_1_4_input in matcher:
+                return matcher[courses][course_1_4_input]
 
     elif courses == 'V - VI':
-        matcher: Dict[str, str] = {'1': 'V', '2': 'VI'}
         while True:
             clear()
             print('############ STUDENT\'S COURSE ############\n\n'
                   'Chose a course from list below:\n'
-                  '1. IV\n'
-                  '2. V\n')
-            course_input: str = input('>')
+                  '1. V\n'
+                  '2. VI\n')
+            course_5_6_input: str = input('>')
 
-            if course_input in matcher:
-                return matcher[course_input]
+            if course_5_6_input in matcher:
+                return matcher[courses][course_5_6_input]
 
     else:
         return courses
@@ -239,8 +241,8 @@ def edit_person(person: BasePerson) -> None:
             person.update_person_data('address', new_address)
 
         elif edit_input == '7':
-            new_phone_number: str = get_pattern_input(class_type, 'phone number', PHONE_NUMBER_PATTERN, '+380994596578 / 1 (33) 257-12-31')
-            parts_list: List[str] = PHONE_NUMBER_PATTERN.findall(new_phone_number)[0]
+            raw_phone_number: str = get_pattern_input(class_type, 'phone number', PHONE_NUMBER_PATTERN, '+380994596578 / 1 (33) 257-12-31')
+            parts_list: List[str] = PHONE_NUMBER_PATTERN.findall(raw_phone_number)[0]
             new_phone_number: str = '+' + ''.join(parts_list)
             person.update_person_data('phone_number', new_phone_number)
 

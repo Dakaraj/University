@@ -1,3 +1,4 @@
+from typing import Set
 from utils.utils import *
 
 
@@ -77,17 +78,17 @@ class App:
                     if len(search_all_query) < 3:
                         continue
 
-                    list_of_finds: List[BasePerson] = [person for person in self.persons_list
-                                                       if person.search_person(search_all_query)]
+                    list_of_persons: List[BasePerson] = [person for person in self.persons_list
+                                                         if person.search_person(search_all_query)]
 
-                    if not list_of_finds:
+                    if not list_of_persons:
                         clear()
                         print('############ SEARCH ALL ENTRIES ############\n\n'
                               'No results found')
                         sleep(3)
                         break
 
-                    search_results_manager(list_of_finds, self.persons_list)
+                    search_results_manager(list_of_persons, self.persons_list)
                     break
 
             elif user_input == '3':
@@ -99,18 +100,18 @@ class App:
                     if len(search_students_query) < 3:
                         continue
 
-                    list_of_finds: List[Student] = [person for person in self.persons_list
-                                                    if isinstance(person, Student)
-                                                    and person.search_person(search_students_query)]
+                    list_of_students: List[BasePerson] = [person for person in self.persons_list
+                                                       if isinstance(person, Student)
+                                                       and person.search_person(search_students_query)]
 
-                    if not list_of_finds:
+                    if not list_of_students:
                         clear()
                         print('############ SEARCH STUDENTS ONLY ############\n\n'
                               'No results found')
                         sleep(3)
                         break
 
-                    search_results_manager(list_of_finds, self.persons_list)
+                    search_results_manager(list_of_students, self.persons_list)
                     break
 
             elif user_input == '4':
@@ -122,18 +123,18 @@ class App:
                     if len(search_employees_query) < 3:
                         continue
 
-                    list_of_finds: List[Employee] = [person for person in self.persons_list
-                                                     if isinstance(person, Employee)
-                                                     and person.search_person(search_employees_query)]
+                    list_of_employees: List[BasePerson] = [person for person in self.persons_list
+                                                         if isinstance(person, Employee)
+                                                         and person.search_person(search_employees_query)]
 
-                    if not list_of_finds:
+                    if not list_of_employees:
                         clear()
                         print('############ SEARCH EMPLOYEES ONLY ############\n\n'
                               'No results found')
                         sleep(3)
                         break
 
-                    search_results_manager(list_of_finds, self.persons_list)
+                    search_results_manager(list_of_employees, self.persons_list)
                     break
 
             elif user_input == '5':
@@ -149,7 +150,7 @@ class App:
                         break
 
                     if reference_input == '1':
-                        positions_set: set = set()
+                        positions_set: Set[str] = set()
                         for person in self.persons_list:
                             if isinstance(person, Employee):
                                 positions_set.add(person.get_specific_value('position'))
@@ -165,7 +166,7 @@ class App:
                         input('>')
 
                     if reference_input == '2':
-                        faculties_set: set = set()
+                        faculties_set: Set[str] = set()
                         for person in self.persons_list:
                             faculties_set.add(person.get_specific_value('faculty'))
 
